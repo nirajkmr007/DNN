@@ -1,0 +1,97 @@
+[project]
+name = "dnn"
+version = "0.1.0"
+description = "A repo to practice deep nural network concepts."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{ name = "Niraj Kumar", email = "nirajkmr007@gmail.com" }]
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = []
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "numpy>=2.4.6",
+    "pandas>=3.0.3",
+    "matplotlib>=3.10.9",
+    "scikit-learn>=1.8.0",
+    "seaborn>=0.13.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/nirajkmr007/dnn"
+Repository = "https://github.com/nirajkmr007/dnn"
+Issues = "https://github.com/nirajkmr007/dnn/issues"
+Documentation = "https://nirajkmr007.github.io/dnn/"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/dnn"]
+
+# -----------------------------------------------------------------------------
+# Dev dependencies (managed by uv: `uv sync` installs these)
+# -----------------------------------------------------------------------------
+[dependency-groups]
+dev = [
+    "pytest>=8.2",
+    "ruff>=0.6",
+    "mypy>=1.11",
+    "pre-commit>=3.8",
+    "mkdocs-material>=9.5",
+    "mkdocstrings[python]>=0.26",
+]
+
+# -----------------------------------------------------------------------------
+# Ruff: linter + formatter
+# -----------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W",   # pycodestyle
+    "F",        # pyflakes
+    "I",        # isort
+    "N",        # pep8-naming
+    "UP",       # pyupgrade
+    "B",        # flake8-bugbear
+    "A",        # flake8-builtins
+    "C4",       # flake8-comprehensions
+    "SIM",      # flake8-simplify
+    "PTH",      # use pathlib
+    "RUF",      # ruff-specific
+]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+# -----------------------------------------------------------------------------
+# mypy: static type checking
+# -----------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+files = ["src", "tests"]
+
+# -----------------------------------------------------------------------------
+# pytest
+# -----------------------------------------------------------------------------
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-ra"
